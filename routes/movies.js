@@ -29,7 +29,7 @@ router.get("/:id", async (req, res, next) => {
 
 // curl -X POST -H "Content-Type: application/json" -d '{"title":"Llamas From Space", "plot":"Aliens..."}' http://localhost:5000/movies
 router.post("/", async (req, res, next) => {
-  let resultStatus;
+  // let resultStatus;
   let result = await movieData.create(req.body);
 
   if (!result) {
@@ -45,9 +45,9 @@ router.post("/", async (req, res, next) => {
 
 // curl -X PUT -H "Content-Type: application/json" -d '{"plot":"Sharks..."}' http://localhost:5000/movies/573a13a3f29313caabd0e77b
 router.put("/:id", async (req, res, next) => {
-  let resultStatus;
+  // let resultStatus;
   const result = await movieData.updateById(req.params.id, req.body)
-  console.log(result);
+  // console.log(result);
   if (!result) {
     res.status(500).send({error: "Something went wrong. Please try again."});
   } else {
@@ -92,6 +92,7 @@ router.get("/:movieId/comments", async (req, res, next) => {
 // Get a single comment by id
 // curl http://localhost:5000/movies/573a1392f29313caabcd98c3/comments/5a9427648b0beebeb6957d45
 router.get("/:movieId/comments/:commentId", async (req, res, next) => {
+  let resultStatus;
   const result = await movieData.getCommentById(req.params.commentId);
   if (result.error) {
     resultStatus = 404;
@@ -104,7 +105,7 @@ router.get("/:movieId/comments/:commentId", async (req, res, next) => {
 // Add a new comment to comments collection
 // curl -X POST -H "Content-Type: application/json" -d '{"name":"Joseph", "email":"test@test.com", "text":"Add test comment..."}' http://localhost:5000/movies/573a1390f29313caabcd516c/comments
 router.post("/:movieId/comments", async (req, res, next) => {
-  let resultStatus;
+  // let resultStatus;
   let result = await movieData.createComment(req.params.movieId, req.body);
 
   if (!result) {
